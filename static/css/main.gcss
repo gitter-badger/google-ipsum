@@ -1,0 +1,17 @@
+$color1: #2e6580
+$color2: #3a83a7
+$color3: #509ec4
+$color4: #75b3d2
+$color5: #9bc9df
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6
+  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, serif
+  color: $color1
+  small
+    color: $color2
+
+body
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif
+
+footer
+  margin-top: 10px

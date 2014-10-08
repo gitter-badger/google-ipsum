@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Google Ipsum</title>
 
-    <!-- Bootstrap -->
+    <link href='//fonts.googleapis.com/css?family=Droid+Serif|Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,9 +25,25 @@
           <div class="page-header">
             <h1>Google Ipsum <small>A Google themed Lorem Ipsum Generator</small></h1>
           </div>
-          <div class="col-xs-12">
+          <div class="col-xs-12 col-md-7">
             {{ template "content" . }}
           </div>
+          <div class="col-xs-12 col-md-5">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">API Documentation</h3>
+              </div>
+              <div class="panel-body">
+              </div>
+            </div>
+          </div>
+          {{ with .Ipsum }}
+          <div class="col-xs-12">
+            <div class="well">
+              Output goes here
+            </div>
+          </div>
+          {{ end }}
         </div>
     </div>
 
