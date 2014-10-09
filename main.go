@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/bmizerany/pat"
 	"github.com/yosssi/gcss"
@@ -18,6 +19,7 @@ func init() {
 	router.Get("/css/:file", http.HandlerFunc(compileCSS))
 
 	// handle application paths
+	router.Post("/generate", http.HandlerFunc(generateIpsum))
 	router.Get("/", http.HandlerFunc(rootHandler))
 	http.Handle("/", router)
 }
@@ -76,5 +78,46 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	// render the template files and serve the page
 	if err := page.Execute(w, nil); err != nil {
 		http.Error(w, "failed to load page", http.StatusInternalServerError)
+	}
+}
+
+func generateIpsum(w http.ResponseWriter, r *http.Request) {
+	type content struct {
+		// Ipsum contains the generated ipsum text
+		Ipsum []string
+	}
+	t := content{}
+
+	s := r.FormValue("paragraph")
+	n, err := strconv.Atoi(s)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	s = r.FormValue("lead")
+	l, err := strconv.ParseBool(s)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	for i := 0; i < n; i++ {
+		var paragraph string
+		if i == 0 {
+			if l {
+				paragraph = "Google ipsum dolor sit amet... "
+			}
+		}
+		// TODO generate ipsum text
+
+		t.Ipsum = append(t.Ipsum, paragraph)
+	}
+
+	page := template.Must(template.ParseFiles(
+		"static/_base.html",
+		"static/index.html",
+	))
+
+	if err = page.Execute(w, t); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }

@@ -4,4 +4,17 @@
     <p>Your, your right. Shit. Calvin. Chuck, Chuck, its' your cousin. Your cousin Marvin Berry, you know that new sound you're lookin for, well listen to this. Hello.</p>
 
     <p>Hey, hey, Doc, where are you? Right, okay, so right around 9:00 she's gonna get very angry with me. I have to tell you about the future. That's George McFly. Hello.</p>
+    <br/>
+    <form class="form-inline" role="form" method="POST" action="/generate">
+      <div class="form-group">
+        <label for="paragraph">Paragraphs</label>
+        <input type="number" class="form-control" id="paragraph" name="paragraph" value="5" required>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="lead" value="true" checked> Start with 'Google ipsum dolor sit amet...'
+        </label>
+      </div>
+      <input type="submit" value="Generate" class="btn btn-primary">
+    </form>
 {{ end }}

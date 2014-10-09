@@ -23,11 +23,12 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="page-header">
-            <h1>Google Ipsum <small>A Google themed Lorem Ipsum Generator</small></h1>
+            <h1><a href="/" alt="Root">Google Ipsum</a> <small>A Google themed Lorem Ipsum Generator</small></h1>
           </div>
           <div class="col-xs-12 col-md-7">
             {{ template "content" . }}
           </div>
+          <div class="clearfix visible-xs-block"></div>
           <div class="col-xs-12 col-md-5">
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -40,7 +41,9 @@
           {{ with .Ipsum }}
           <div class="col-xs-12">
             <div class="well">
-              Output goes here
+              {{ range . }}
+              {{ . }}
+              {{ end }}
             </div>
           </div>
           {{ end }}
