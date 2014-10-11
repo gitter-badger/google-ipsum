@@ -95,6 +95,10 @@ func generateIpsum(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s = r.FormValue("lead")
+	if s == "" {
+		s = "false"
+	}
+
 	l, err := strconv.ParseBool(s)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -104,10 +108,12 @@ func generateIpsum(w http.ResponseWriter, r *http.Request) {
 		var paragraph string
 		if i == 0 {
 			if l {
-				paragraph = "Google ipsum dolor sit amet... "
+				paragraph += "Google ipsum dolor sit amet "
 			}
 		}
 		// TODO generate ipsum text
+		s, _ := getIpsum()
+		paragraph = paragraph + s
 
 		t.Ipsum = append(t.Ipsum, paragraph)
 	}
