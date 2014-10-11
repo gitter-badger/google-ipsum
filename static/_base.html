@@ -20,34 +20,35 @@
   </head>
   <body>
     <div class="container-fluid">
+      <div class="page-header">
+        <h1><a href="/">Google Ipsum</a> <small>A Google themed Lorem Ipsum Generator</small></h1>
+      </div>
       <div class="row">
-        <div class="col-xs-12">
-          <div class="page-header">
-            <h1><a href="/" alt="Root">Google Ipsum</a> <small>A Google themed Lorem Ipsum Generator</small></h1>
-          </div>
-          <div class="col-xs-12 col-md-7">
-            {{ template "content" . }}
-          </div>
-          <div class="clearfix visible-xs-block"></div>
-          <div class="col-xs-12 col-md-5">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">API Documentation</h3>
-              </div>
-              <div class="panel-body">
-              </div>
-            </div>
-          </div>
-          {{ with .Ipsum }}
-          <div class="col-xs-12">
-            <div class="well">
-              {{ range . }}
-              {{ . }}
-              {{ end }}
-            </div>
-          </div>
-          {{ end }}
+        <div class="col-xs-12 col-md-7">
+          {{ template "content" . }}
         </div>
+        <div class="clearfix visible-xs-block"></div>
+        <div class="col-xs-12 col-md-5">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">API Documentation</h3>
+            </div>
+            <div class="panel-body">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row ipsum">
+        {{ with .Ipsum }}
+        <div class="col-xs-12">
+          <div class="well">
+            {{ range . }}
+            <p>{{ . }}</p>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
     </div>
 
     <footer>
