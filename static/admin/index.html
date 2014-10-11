@@ -1,0 +1,9 @@
+{{ define "content" }}
+  <ul class="nav nav-pills">
+    <li><a href="/admin"><span class="glyphicon glyphicon-home"></span> Admin Home</a></li>
+    <li><a href="/admin/word/add"><span class="glyphicon glyphicon-plus"></span> Add word</a></li>
+    <li><a href="/admin"><span class="glyphicon glyphicon-search"></span> Search word</a></li>
+  </ul>
+  <br />
+  {{ template "adminPage" . }}
+{{ end }}
