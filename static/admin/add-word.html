@@ -1,0 +1,10 @@
+{{ define "adminPage" }}
+  <form role="form" method="POST" action="/admin/word/add">
+    <div class="form-group">
+      <label for="newWord">Word</label>
+      <input type="text" class="form-control" id="newWord" name="newWord" placeholder="Android">
+      <span class="help-block">Enter a Google product name or code name here</span>
+    </div>
+    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Add</button>
+  </form>
+{{ end }}
