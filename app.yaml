@@ -7,5 +7,9 @@ handlers:
   - url: /static/img
     static_dir: static/img
 
+  - url: /admin/.*
+    script: _go_app
+    login: admin
+
   - url: /.*
     script: _go_app
