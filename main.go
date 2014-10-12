@@ -115,7 +115,7 @@ func generateIpsum(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		// TODO generate ipsum text
-		s, _ := getIpsum()
+		s, _ := getIpsum(r)
 		paragraph = paragraph + s
 
 		t.Ipsum = append(t.Ipsum, paragraph)
