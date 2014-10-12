@@ -21,6 +21,7 @@ func init() {
 	// handle application paths
 	router.Get("/admin", http.HandlerFunc(adminHandler))
 	router.Get("/admin/word/add", http.HandlerFunc(addWord))
+	router.Post("/admin/word/add", http.HandlerFunc(addWord))
 	router.Post("/generate", http.HandlerFunc(generateIpsum))
 	router.Get("/", http.HandlerFunc(rootHandler))
 	http.Handle("/", router)
