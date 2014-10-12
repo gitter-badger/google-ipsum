@@ -1,2 +1,22 @@
 {{ define "adminPage" }}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Content</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range . }}
+      <tr>
+        <td>
+          {{ .Date }}
+        </td>
+        <td>
+          {{ .Content }}
+        </td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
 {{ end }}
