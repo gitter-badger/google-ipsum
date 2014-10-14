@@ -19,31 +19,25 @@ func ipsumKey(c appengine.Context) *datastore.Key {
 	return datastore.NewKey(c, "Ipsum", "default_ipsum", 0, nil)
 }
 
-func getUserContext(w http.ResponseWriter, r *http.Request) (appengine.Context, *user.User) {
+func getUserContext(r *http.Request) (appengine.Context, *user.User) {
 	c := appengine.NewContext(r)
 	u := user.Current(c)
-	if u == nil {
-		url, err := user.LoginURL(c, r.URL.String())
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return nil, nil
-		}
-		w.Header().Set("Location", url)
-		w.WriteHeader(http.StatusFound)
-		return nil, nil
-	}
 
 	return c, u
 }
 
 func adminHandler(w http.ResponseWriter, r *http.Request) {
-	c, _ := getUserContext(w, r)
-
-	page := template.Must(template.ParseFiles(
-		"static/admin/_base.html",
-		"static/admin/index.html",
-		"static/admin/main.html",
-	))
+	c, u := getUserContext(r)
+	if u == nil {
+		url, err := user.LoginURL(c, r.URL.String())
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Location", url)
+		w.WriteHeader(http.StatusFound)
+		return
+	}
 
 	q := datastore.NewQuery("Ipsum").
 		Order("-Date").
@@ -56,6 +50,12 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	page := template.Must(template.ParseFiles(
+		"static/admin/_base.html",
+		"static/admin/index.html",
+		"static/admin/main.html",
+	))
+
 	if err := page.Execute(w, ipsum); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -63,7 +63,17 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func addWord(w http.ResponseWriter, r *http.Request) {
-	c, _ := getUserContext(w, r)
+	c, u := getUserContext(r)
+	if u == nil {
+		url, err := user.LoginURL(c, r.URL.String())
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Location", url)
+		w.WriteHeader(http.StatusFound)
+		return
+	}
 
 	if r.Method == "GET" {
 		page := template.Must(template.ParseFiles(
