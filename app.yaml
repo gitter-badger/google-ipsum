@@ -1,5 +1,5 @@
-application: googleipsum
-version: 1
+application: ipsum-go
+version: 1a
 runtime: go
 api_version: go1
 
